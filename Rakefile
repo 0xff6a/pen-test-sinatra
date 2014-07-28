@@ -1,5 +1,5 @@
 require 'data_mapper'
-require './app/data_mapper_setup'
+require File.join(File.dirname(__FILE__), 'app/data_mapper_setup.rb')
 
 task :auto_upgrade do
 	DataMapper.auto_upgrade!

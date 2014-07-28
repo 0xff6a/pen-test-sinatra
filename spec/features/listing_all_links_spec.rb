@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 feature 'User browses the list of links' do
 
 	before(:each) {

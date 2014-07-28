@@ -1,20 +1,21 @@
-require 'spec_helper'
-
 feature 'User adds a new link' do
 	
+	let(:example_url) 	{ 'http://www.makersacademy.com' 	}	
+	let(:example_title)	{ 'Makers Academy'								}
+
 	scenario 'When browsing the homepage' do
 		expect(Link.count).to eq(0)
 		visit '/'
-		add_link("http://www.makersacademy.com", "Makers Academy")
+		add_link(example_url, example_title)
 		expect(Link.count).to eq(1)
 		link = Link.first
-		expect(link.url).to eq("http://www.makersacademy.com")
-		expect(link.title).to eq("Makers Academy")
+		expect(link.url).to eq(example_url)
+		expect(link.title).to eq(example_title)
 	end
 
 	scenario 'with a few tags' do
 		visit '/'
-		add_link("http://www.makersacademy.com", "Makers Academy", ['education', 'ruby'])
+		add_link(example_url, example_title, ['education', 'ruby'])
 		link = Link.first
 		expect(link.tags.map(&:text)).to include('education')
 		expect(link.tags.map(&:text)).to include('ruby')

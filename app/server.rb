@@ -1,9 +1,9 @@
 require 'sinatra'
 require 'data_mapper'
 require 'rack-flash'
-require './lib/link'
-require './lib/tag'
-require './lib/user'
+require File.join(File.dirname(__FILE__), '..', 'lib/link.rb')
+require File.join(File.dirname(__FILE__), '..', 'lib/tag.rb')
+require File.join(File.dirname(__FILE__), '..', 'lib/user.rb')
 require_relative 'helpers/application'
 require_relative 'data_mapper_setup'
 
