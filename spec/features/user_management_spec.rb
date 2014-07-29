@@ -84,11 +84,10 @@ feature 'User forgets password' do
 		click_link('Forgotten password?')
 		expect(page).to have_content('Enter your email to reset your password')
 		fill_in 'email', :with => 'foxjerem@gmail.com'
+		expect(Mailer).to receive(:send_message)
 		click_button('Reset')
 		expect(User.first.password_token).not_to be nil
 		expect(User.first.password_token_timestamp).not_to be nil
-		# expect(self).to receive(:send_message).with(User.first.email)
-
 	end
 
 end

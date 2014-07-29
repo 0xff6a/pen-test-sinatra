@@ -25,7 +25,8 @@ post '/users/reset_password' do
 	user.password_token = (1..64).map{ ('A'..'Z').to_a.sample }.join
 	user.password_token_timestamp = Time.now
 	user.save!
-	send_message(user.email, "Password Reset", "Click here to reset your password: http://localhost:9292/users/reset_password/#{user.password_token}")
+	Mailer.send_message(user.email, "Password Reset", 
+		"Click here to reset your password: http://localhost:9292/users/reset_password/#{user.password_token}")
 end
 
 get '/users/reset_password/:token' do
