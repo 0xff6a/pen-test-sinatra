@@ -33,9 +33,7 @@ feature 'User signs in' do
 	let(:test_pwd)		{ 'test'					}
 
 	before(:each) do
-		User.create(:email => test_email,
-								:password => test_pwd,
-								:password_confirmation => test_pwd)
+		create_user(test_email, test_pwd)
 	end
 
 	scenario 'with correct credentials' do
@@ -60,9 +58,7 @@ feature 'User signs out' do
 	let(:test_pwd)		{ 'test'					}
 
 	before(:each) do
-		User.create(:email => test_email,
-								:password => test_pwd,
-								:password_confirmation => test_pwd)
+		create_user(test_email, test_pwd)
 	end
 
 	scenario 'while being signed in' do
@@ -70,6 +66,26 @@ feature 'User signs out' do
 		click_button 'Sign Out'
 		expect(page).to have_content('Goodbye!')
 		expect(page).not_to have_content("Welcome, #{test_email}")
+	end
+
+end
+
+feature 'User forgets password' do
+
+	before(:each) do
+		create_user('foxjerem@gmail.com', '1234')
+	end
+
+	scenario 'requesting a password reminder' do
+		expect(User.first.password_token).to be nil
+		expect(User.first.password_token_timestamp).to be nil
+		visit '/sessions/new'
+		click_link('Forgotten password?')
+		expect(page).to have_content('Enter your email to reset your password')
+		fill_in 'email', :with => 'foxjerem@gmail.com'
+		click_button('Reset')
+		expect(User.first.password_token).not_to be nil
+		expect(User.first.password_token_timestamp).not_to be nil
 	end
 
 end

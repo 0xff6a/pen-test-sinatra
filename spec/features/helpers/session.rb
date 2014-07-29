@@ -17,4 +17,10 @@ module SessionHelpers
 		click_button 'Sign In'
 	end
 
+	def create_user(email, password)
+		User.create(:email => email,
+								:password => password,
+								:password_confirmation => password)
+	end
+
 end
