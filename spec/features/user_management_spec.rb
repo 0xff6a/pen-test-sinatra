@@ -1,4 +1,5 @@
 require_relative 'helpers/session'
+require 'rest-client'
 
 include SessionHelpers
 
@@ -86,6 +87,8 @@ feature 'User forgets password' do
 		click_button('Reset')
 		expect(User.first.password_token).not_to be nil
 		expect(User.first.password_token_timestamp).not_to be nil
+		# expect(self).to receive(:send_message).with(User.first.email)
+
 	end
 
 end
