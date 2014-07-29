@@ -1,3 +1,5 @@
+SECONDS_IN_HOUR = 3600
+
 get '/users/new' do
 	@user = User.new
 	erb :'users/new'
@@ -22,13 +24,27 @@ end
 
 post '/users/reset_password' do
 	user = User.first(:email => params[:email])
-	user.password_token = (1..64).map{ ('A'..'Z').to_a.sample }.join
-	user.password_token_timestamp = Time.now
-	user.save!
+	user.update(:password_token => generate_token, :password_token_timestamp => Time.now)
 	Mailer.send_message(user.email, "Password Reset", 
-		"Click here to reset your password: http://localhost:9292/users/reset_password/#{user.password_token}")
+		"Click here to reset your password: 
+		http://localhost:9292/users/reset_password/#{user.password_token}")
 end
 
-get '/users/reset_password/:token' do
+get '/users/reset_password/:token' do |token|
+	@token = token
+	@user = User.first(:password_token => token)
+	if @user && Time.parse(@user.password_token_timestamp) > (Time.now - SECONDS_IN_HOUR)
+		erb :'users/reset_password' 
+	else
+		puts "NO DICE"
+	end
+end
 
+post '/users/confirm_reset_password' do
+	user = User.first(:password_token => params[:token])
+	user.update(:password => params[:new_password],
+							:password_confirmation => params[:new_password_confirmation],
+							:password_token => nil,
+							:password_token_timestamp => nil)
+	"DONE"
 end

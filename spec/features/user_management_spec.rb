@@ -77,17 +77,30 @@ feature 'User forgets password' do
 		create_user('foxjerem@gmail.com', '1234')
 	end
 
-	scenario 'requesting a password reminder' do
-		expect(User.first.password_token).to be nil
-		expect(User.first.password_token_timestamp).to be nil
+	scenario 'requesting a password reset' do
+		expect(user.password_token).to be nil
+		expect(user.password_token_timestamp).to be nil
 		visit '/sessions/new'
 		click_link('Forgotten password?')
 		expect(page).to have_content('Enter your email to reset your password')
 		fill_in 'email', :with => 'foxjerem@gmail.com'
 		expect(Mailer).to receive(:send_message)
 		click_button('Reset')
-		expect(User.first.password_token).not_to be nil
-		expect(User.first.password_token_timestamp).not_to be nil
+		expect(user.password_token).not_to be nil
+		expect(user.password_token_timestamp).not_to be nil
+	end
+
+	scenario 'resetting the password' do
+		user.update(:password_token => "test", :password_token_timestamp => Time.now)
+		visit '/users/reset_password/test'
+		expect(page).to have_content('Welcome foxjerem@gmail.com, enter a new password')
+		fill_in 'new_password', :with => 'new'
+		fill_in 'new_password_confirmation', :with => 'new'
+		click_button 'Reset'
+		expect(User.authenticate('foxjerem@gmail.com', 'new')).not_to be nil
+	end
+
+	scenario 'trying to reset the password with an invalid token' do
 	end
 
 end

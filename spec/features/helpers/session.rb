@@ -1,5 +1,9 @@
 module SessionHelpers
 
+	def user
+		User.first
+	end
+
 	def sign_up(email = sample_email,
 							password = sample_pwd,
 							password_confirmation = sample_pwd)
