@@ -101,6 +101,9 @@ feature 'User forgets password' do
 	end
 
 	scenario 'trying to reset the password with an invalid token' do
+		user.update(:password_token => "test", :password_token_timestamp => Time.now)
+		visit '/users/reset_password/not_the_right_token'
+		expect(page).to have_content("Invalid Token")
 	end
 
 end

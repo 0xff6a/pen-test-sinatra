@@ -36,7 +36,7 @@ get '/users/reset_password/:token' do |token|
 	if @user && Time.parse(@user.password_token_timestamp) > (Time.now - SECONDS_IN_HOUR)
 		erb :'users/reset_password' 
 	else
-		puts "NO DICE"
+		erb :'users/reset_error'
 	end
 end
 
