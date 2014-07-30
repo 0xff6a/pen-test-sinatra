@@ -5,7 +5,11 @@ helpers do
 	end
 
 	def generate_token
-		(1..64).map{ ('A'..'Z').to_a.sample }.join
+		(1..64).map{ random_char }.join
+	end
+
+	def random_char
+		[('0'..'9').to_a, ('a'..'z').to_a, ('A'..'Z').to_a ].flatten.sample
 	end
 
 end
