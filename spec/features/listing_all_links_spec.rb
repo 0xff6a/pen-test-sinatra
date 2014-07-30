@@ -28,7 +28,8 @@ feature 'User browses the list of links and tags' do
 	end
 
 	scenario 'filtered by a tag' do
-		visit '/tags/education'
+		visit '/'
+		click_on 'education'
 		expect(page).to have_content('Makers Academy')
 		expect(page).to have_content('Code.org')
 		expect(page).not_to have_content('Google')
