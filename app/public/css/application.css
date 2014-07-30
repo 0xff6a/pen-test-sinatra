@@ -19,7 +19,7 @@ a.button.highlighted {
 
 a.button, input.button {
   display: inline-block; 
-  width: 80px;
+  width: 100px;
   background-color: #58A0D0;
   border: 2px solid white;
   color: white; 
@@ -31,6 +31,7 @@ a.button, input.button {
   margin-right: 5px;
   text-shadow: 0 0 2px rgba(0,0,0, 0.4); 
   font-size: 12pt;
+  cursor: pointer;
 }
 
 a.title {
@@ -78,18 +79,7 @@ header.container-header {
   margin-bottom: 10px;
 }
 
-#tag-container {
-  background-color: #EEE;
-  box-shadow: 0 0 5px rgba(0,0,0,0.4);
-  margin-right: 100px;
-  padding: 15px 10px;
-  padding-top: 3px;
-  margin-left: 100px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-#link-container {
+div.container, form.container {
 	background-color: #EEE;
 	box-shadow: 0 0 5px rgba(0,0,0,0.4);
 	margin-right: 100px;
@@ -120,6 +110,23 @@ li.link div.description {
 li.link span.source {
   float: right; 
   font-size: 12px;
+}
+
+li.flash-error {
+  background-color: rgba(215, 40, 40, 0.9);
+}
+
+div.flash-notice{
+  background-color: rgba(67,183,120,0.75);
+}
+
+div.flash-notice, li.flash-error {
+  text-align: center;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 4px;
+  box-shadow: 0 0 3px rgba(0,0,0,0.4);
+  color: white;
 }
 
 footer {
