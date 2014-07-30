@@ -10,13 +10,13 @@ describe Link do
 
 	before(:each) do
 		Link.create(:title => "Makers Academy",
-								:url => "http://wwww,makersacademy.com/",
+								:url => "http://wwww.makersacademy.com/",
 								:user_id => 1)
 	end
 
 	it 'links can be added to the DB' do
 		expect(Link.count).to eq(1)
-		expect(link.url).to eq("http://wwww,makersacademy.com/")
+		expect(link.url).to eq("http://wwww.makersacademy.com/")
 		expect(link.title).to eq("Makers Academy")
 	end
 
@@ -34,9 +34,13 @@ describe Link do
 		expect(link.tags.map(&:text)).to eq ['education']
 	end
 
-	it 'can be created with a user_id' do
-		link.update(:user_id => 7)
-		expect(link.user_id).to eq 7
+	it 'will not be saved without a valid url' do
+		expect { Link.create(:title => "Google",
+												:url => "blahblah",
+												:user_id => 1) }.to change { Link.count }.by(0)
+		expect { Link.create(:title => "Google",
+												:url => "google.com",
+												:user_id => 1) }.to change { Link.count }.by(0)
 	end
 
 	def link
