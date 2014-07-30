@@ -8,10 +8,10 @@
 			<a href='/links/new' id='add-link' class='button highlighted'>Add Link</a>
 			<form id='sign-out' method='post' action='/sessions'>
 				<input type='hidden' name='_method' value='delete'>
-				<input class='button' type='submit' value='Sign Out'>
+				<input id='sign-out-button' class='button' type='submit' value='Sign Out'>
 			</form>
 		<% else %>
-			<a href='/users/new' id='sign-up' class='button'>Sign up</a>
+			<a href='/users/new' id='sign-up' class='button highlighted'>Sign Up</a>
 			<a href='/sessions/new' id='sign-in' class='button'>Sign In</a>
 		<% end %>	
 	</div>
