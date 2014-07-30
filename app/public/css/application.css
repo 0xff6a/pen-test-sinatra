@@ -17,6 +17,11 @@ a.button.highlighted {
   padding: 7px;
 }
 
+input.button.green {
+  background-color: #58d088;
+  border-color: black;
+}
+
 a.button, input.button {
   display: inline-block; 
   width: 100px;
@@ -55,6 +60,8 @@ header > * {
 header #logo {    
   display: flex;  
   font-size: 30pt; 
+  color: white;
+  font-family: Arial;
 }
 
 header #user-links {
