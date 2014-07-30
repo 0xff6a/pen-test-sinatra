@@ -5,7 +5,13 @@ end
 post '/links' do
 	url = params['url']
 	title = params['title']
-	tags = params['tags'].split(' ').map { |tag| Tag.first_or_create(:text => tag) }
-	Link.create(:url => url, :title => title, :tags => tags )
+	tags = create_tags(params['tags'])
+	Link.create(:url => url, :title => title, :tags => tags, :user_id => session[:user_id] )
 	redirect to('/')
+end
+
+def create_tags(text)
+	text.split(' ').map do |tag| 
+		Tag.first_or_create(:text => tag, :user_id => session[:user_id]) 
+	end
 end

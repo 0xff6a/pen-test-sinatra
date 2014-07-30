@@ -10,7 +10,8 @@ describe Link do
 
 	before(:each) do
 		Link.create(:title => "Makers Academy",
-								:url => "http://wwww,makersacademy.com/")
+								:url => "http://wwww,makersacademy.com/",
+								:user_id => 1)
 	end
 
 	it 'links can be added to the DB' do
@@ -29,12 +30,8 @@ describe Link do
 	end
 
 	it 'can have tags added' do
-		link.update(:tags => [Tag.first_or_create(:text => 'education')])
+		link.update(:tags => [Tag.first_or_create(:text => 'education', :user_id => 1)])
 		expect(link.tags.map(&:text)).to eq ['education']
-	end
-
-	it 'it has default user_id' do
-		expect(link.user_id).to eq 0
 	end
 
 	it 'can be created with a user_id' do
