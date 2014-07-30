@@ -17,6 +17,7 @@ feature 'User adds a new link when signed in' do
 		link = Link.first
 		expect(link.url).to eq(example_url)
 		expect(link.title).to eq(example_title)
+		expect(Time.parse(link.timestamp)).to be_within(60).of(Time.now)
 	end
 
 	scenario 'with a few tags' do

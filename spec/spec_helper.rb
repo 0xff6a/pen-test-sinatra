@@ -25,6 +25,8 @@ Capybara.app = Sinatra::Application.new
 RSpec.configure do |config|
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
+  DataMapper.auto_upgrade!
+  
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)

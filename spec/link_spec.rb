@@ -11,7 +11,8 @@ describe Link do
 	before(:each) do
 		Link.create(:title => "Makers Academy",
 								:url => "http://wwww.makersacademy.com/",
-								:user_id => 1)
+								:user_id => 1,
+								:timestamp => Time.now)
 	end
 
 	it 'links can be added to the DB' do
@@ -41,6 +42,14 @@ describe Link do
 		expect { Link.create(:title => "Google",
 												:url => "google.com",
 												:user_id => 1) }.to change { Link.count }.by(0)
+	end
+
+	it 'should have a timestamp for when it was created' do
+		expect(Time.parse(link.timestamp)).to be_within(60).of(Time.now)
+	end
+
+	it 'should allow the user to add a description' do
+
 	end
 
 	def link

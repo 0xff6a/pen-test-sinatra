@@ -5,6 +5,6 @@
 	</div>
 	<span class='source'>
 		added yesterday by 
-		<a href='#'><%= User.first(:id => link.user_id).email %></a>
+		<a href='#'><%= User.first(:id => link.user_id).email if User.first(:id => link.user_id)%></a>
 	</span>
 </li>
