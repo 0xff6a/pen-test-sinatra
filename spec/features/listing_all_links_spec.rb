@@ -1,4 +1,4 @@
-feature 'User browses the list of links' do
+feature 'User browses the list of links and tags' do
 
 	before(:each) {
 		Link.create(:url => 'http://www.makersacademy.com',
@@ -21,7 +21,10 @@ feature 'User browses the list of links' do
 
 	scenario 'when opening the home page' do
 		visit '/'
-		expect(page).to have_content("Makers Academy")
+		expect(page).to have_content('Google')
+		expect(page).to have_content('Code.org')
+		expect(page).to have_content('education')
+		expect(page).to have_content('search')
 	end
 
 	scenario 'filtered by a tag' do
@@ -33,3 +36,4 @@ feature 'User browses the list of links' do
 	end
 
 end
+

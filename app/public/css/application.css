@@ -59,11 +59,31 @@ header #user-links {
   text-align: right;  
 }
 
+header.container-header {
+  font-size: 14pt;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#tag-container {
+  background-color: #EEE;
+  box-shadow: 0 0 5px rgba(0,0,0,0.4);
+  margin-right: 100px;
+  padding: 15px 10px;
+  padding-top: 3px;
+  margin-left: 100px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 #link-container {
 	background-color: #EEE;
 	box-shadow: 0 0 5px rgba(0,0,0,0.4);
 	margin-right: 100px;
 	padding: 15px 10px;
+  padding-top: 3px;
 	margin-left: 100px;
 	margin-top: 20px;
 	margin-bottom: 20px;

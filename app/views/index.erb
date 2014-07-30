@@ -1,4 +1,15 @@
+<div id='tag-container'>
+	<header class='container-header'>Tags</header>
+	<p>
+		<% @tags.each do |tag| %>
+			<%= partial :tag, :locals => {:tag => tag} %>
+		<% end %>
+		<a class='title' href=<%="/" %>>All</a>
+	</p>
+</div>
+
 <div id='link-container'>
+	<header class='container-header'>Links</header>
 	<ul>
 		<% @links.each do |link| %>
 			<%= partial :link, :locals => {:link => link} %>
