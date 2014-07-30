@@ -1,3 +1,4 @@
+
 require_relative 'helpers/session'
 require 'rest-client'
 
@@ -9,6 +10,7 @@ feature 'User signs up' do
 	let(:sample_pwd)	 { '1234'								}
 
 	scenario 'when being logged out' do
+		expect(Mailer).to receive(:send_message)
 		expect { sign_up }.to change(User, :count).by(1)
 		expect(page).to have_content("Welcome, #{sample_email}")
 		expect(User.first.email).to eq(sample_email)

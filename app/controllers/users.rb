@@ -11,6 +11,8 @@ post '/users' do
 										 :password_confirmation => params[:password_confirmation])
 	if @user.save
 		session[:user_id] = @user.id
+		Mailer.send_message(user.email, "Welcome to the Bookmark Manager", 
+		"Hey Good Lookin',\n\nWelcome to the bookmark manager.\n\nAll the best,\n\nThe Team")
 		redirect to('/')
 	else
 		flash.now[:errors] = @user.errors.full_messages
