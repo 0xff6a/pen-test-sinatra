@@ -38,6 +38,9 @@ a.button.highlighted {
 	background-color: #d08858;
 }
 
+button.favouriting-button {
+  padding: 1px;
+}
 
 #sign-out-button {
   padding: 5px;
