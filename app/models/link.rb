@@ -6,8 +6,12 @@ class Link
 	has n, :tags, :through => Resource
 
 	property :id, 				Serial
-	property :title, 			String
-	property :url, 				String, :format => :url, :message => 'invalid url format' 
+	property :title, 			String, :required => true, 
+																:message => 'A title must be provided'
+	property :url, 				String, :format => :url, 
+																:message => 'Invalid URL format', 
+																:required => true,
+																:message => 'A URL must be provided' 
 	property :timestamp,	String
 
 end

@@ -6,6 +6,6 @@ class Tag
 	has n, :links, :through => Resource
 
 	property :id, 	Serial
-	property :text, String
+	property :text, String, :required => true, :message => 'At least one tag must be added'
 
 end

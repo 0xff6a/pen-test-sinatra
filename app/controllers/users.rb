@@ -12,6 +12,7 @@ post '/users' do
 	if @user.save
 		session[:user_id] = @user.id
 		send_welcome_message_to(@user)
+		flash[:notice] = 'Welcome'
 		redirect to('/')
 	else
 		flash.now[:errors] = @user.errors.full_messages
@@ -25,8 +26,15 @@ end
 
 post '/users/reset_password' do
 	user = User.first(:email => params[:email])
-	save_token_for(user)
-	send_password_reset_message_to(user)
+	if user
+		save_token_for(user)
+		send_password_reset_message_to(user)
+		flash[:notice] = 'A password reset email is on its way'
+		redirect to('/')
+	else
+		flash[:errors] = ['Your details could not be found']
+		redirect to('/')
+	end
 end
 
 get '/users/reset_password/:token' do |token|
@@ -41,6 +49,12 @@ end
 
 post '/users/confirm_reset_password' do
 	user = User.first(:password_token => params[:token])
-	set_new_password_for(user, params[:new_password], params[:new_password_confirmation])
-	"DONE"
+	if user
+		set_new_password_for(user, params[:new_password], params[:new_password_confirmation])
+		flash[:notice] = 'Your password has been reset'
+		redirect to('/')
+	else
+		flash[:errors] = ['Your token has expired or is invalid']
+		redirect to('/')
+	end
 end
