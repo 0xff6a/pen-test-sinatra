@@ -7,8 +7,7 @@ helpers do
 
 	def send_password_reset_message_to(user)
 		Mailer.send_message(user.email, "Password Reset", 
-		"Click here to reset your password: 
-		http://localhost:9292/users/reset_password/#{user.password_token}")
+		"Click here to reset your password:\n http://salty-ravine-1138.herokuapp.com/#{user.password_token}")
 	end
 
 	def set_new_password_for(user, new_password, new_password_confirmation)
