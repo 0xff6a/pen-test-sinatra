@@ -13,6 +13,6 @@ class Link
 																	:required => true,
 																	:message => 'A URL must be provided' 
 	property :timestamp,		String
-	property :description, 	String
+	property :description, 	Text
 
 end

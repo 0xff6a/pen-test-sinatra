@@ -23,7 +23,7 @@ div.wrapper {
   min-height: 100%;
   height: auto !important;
   height: 100%;
-  margin: 0 auto -70px;
+  margin: 0 auto -90px;
 }
 
 a {
@@ -132,12 +132,13 @@ li.link {
 
 li.link a.title {
   letter-spacing: 1px;
+  font-size: 14pt;
 }
 
 li.link div.description {
   margin: 10px inherit;
   font-family: Arial;
-  font-size: 10pt;
+  font-size: 12pt;
 }
 
 li.link span.source {
@@ -168,10 +169,10 @@ p.new-link-field{
 
 footer {
 	font-family: Arial;
-	font-size: 10pt;
+	font-size: 12pt;
   display: flex;
   background-color: rgba(0,0,0,0.05);
-  height: 70px;
+  height: 90px;
 }
 
 footer > * {
@@ -196,5 +197,5 @@ footer p {
 }
 
   div.footer, div.push {
-    height: 70px;
+    height: 90px;
   }
