@@ -1,5 +1,11 @@
 <li class='link'>
 	<a class='title' href="<%= link.url %>"><%= link.title %></a>
+	<form class='favouriting' method='post' action='/users/favourites'>
+		<input type='hidden' name='link_id' value=<%=link.id %>>
+	  <button class='favouriting-button' name='favourite-link' type='submit' >
+	  	<img src='http://imgur.com/I0EwG.png' />
+	  </button>
+	</form>
 	<div class='description'><%= link.description %></div>
 	<span class='source'>
 		<%= Time.parse(link.timestamp).strftime("added at %I:%M%p on %d-%B-%Y by ") %> 

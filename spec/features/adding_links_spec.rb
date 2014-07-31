@@ -25,7 +25,6 @@ feature 'User adds a new link when signed in' do
 	end
 
 	scenario 'with a few tags' do
-		visit '/links/new'
 		add_link(example_url, example_title, ['education', 'ruby'])
 		link = Link.first
 		expect(link.tags.map(&:text)).to include('education')
@@ -33,7 +32,6 @@ feature 'User adds a new link when signed in' do
 	end
 
 	scenario 'with a description' do
-		visit '/links/new'
 		add_link(example_url, example_title, ['education'], 'Nice link')
 		link = Link.first
 		expect(link.description).to eq 'Nice link'

@@ -19,6 +19,7 @@ require_relative 'controllers/links.rb'
 require_relative 'controllers/sessions.rb'
 require_relative 'controllers/tags.rb'
 require_relative 'controllers/users.rb'
+require_relative 'controllers/favourites.rb'
 
 enable :sessions
 set :session_secret, 'supercalifragalisticexpialodocious'
