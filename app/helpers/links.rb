@@ -1,9 +1,10 @@
 helpers do 
 
-	def create_link(url, title, tags)
+	def create_link(url, title, tags, description='')
 		Link.create(:url => url, :title => title, 
 								:tags => tags, :user_id => session[:user_id],
-								:timestamp => Time.now )
+								:timestamp => Time.now,
+								:description => description )
 	end
 
 	def create_tags(text)

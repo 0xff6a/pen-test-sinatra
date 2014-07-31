@@ -49,8 +49,9 @@ describe Link do
 		expect(Time.parse(link.timestamp)).to be_within(60).of(Time.now)
 	end
 
-	it 'should allow the user to add a description' do
-
+	it 'can have a description added' do
+		link.update(:description => 'What a nice link')
+		expect(link.description).to eq 'What a nice link'
 	end
 
 	def link

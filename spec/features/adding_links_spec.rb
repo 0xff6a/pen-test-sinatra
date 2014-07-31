@@ -28,11 +28,19 @@ feature 'User adds a new link when signed in' do
 		expect(link.tags.map(&:text)).to include('ruby')
 	end
 
-	def add_link(url, title, tags = [])
+	scenario 'with a description' do
+		visit '/links/new'
+		add_link(example_url, example_title, ['education'], 'Nice link')
+		link = Link.first
+		expect(link.description).to eq 'Nice link'
+	end
+
+	def add_link(url, title, tags = [], description='')
 		within('#new-link') do
 			fill_in 'url', :with => url
 			fill_in 'title', :with => title
 			fill_in 'tags', :with => tags.join(' ')
+			fill_in 'description', :with => description
 			click_button 'Add link'
 		end
 	end

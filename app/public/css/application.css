@@ -15,6 +15,17 @@ body {
   font-family: Arial;
 }
 
+html, body {
+  height: 100%;
+}
+
+div.wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -70px;
+}
+
 a {
 	text-decoration: none;
 }
@@ -156,6 +167,7 @@ footer {
 	font-size: 10pt;
   display: flex;
   background-color: rgba(0,0,0,0.05);
+  height: 70px;
 }
 
 footer > * {
@@ -178,3 +190,7 @@ footer #technologies {
 footer p {
   padding: 5px 25px;
 }
+
+  div.footer, div.push {
+    height: 70px;
+  }
