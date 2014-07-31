@@ -48,10 +48,6 @@ input.button.green {
   border-color: black;
 }
 
-button.favouriting-button{
-  display: inline-block;
-}
-
 a.button, input.button {
   display: inline-block; 
   width: 100px;
@@ -127,6 +123,13 @@ div.container {
 	margin-bottom: 20px;
 }
 
+div.star-holder{
+  float: right;
+  margin-top: -10px;
+  font-size: 10pt;
+  text-align: center;
+}
+
 li.link {
   background-color: #EEE; 
   box-shadow: 0 0 5px rgba(0,0,0,0.4);
@@ -146,7 +149,7 @@ li.link div.description {
 }
 
 li.link span.source {
-  float: right; 
+  float: left; 
   font-size: 12px;
 }
 
