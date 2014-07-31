@@ -1,10 +1,8 @@
-<li class='link'>
-	
-	
+<li class='link'>	
 	<div class='star-holder'>
 		<form class='favouriting' method='post' action='/users/favourites'>
 			<input type='hidden' name='link_id' value=<%=link.id %>>
-		  <button class='favouriting-button' name='favourite-link' type='submit' >
+		  <button id='fav' class='favouriting-button' name='favourite' type='submit' >
 		  	<img src='http://imgur.com/I0EwG.png' />
 		  </button>
 		  <div><%= Favourite.count(:link => link) %> adds</div>

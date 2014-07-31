@@ -12,7 +12,7 @@ feature 'Users create favourite links when signed in' do
 	
 	scenario 'favouriting a link while browsing a list of links' do
 		visit('/')
-		click_button 'favourite-link'
+		click_button 'fav'
 		expect(page).to have_content('Added to favourites')
 		expect(user.links.count).to eq(1)
 	end

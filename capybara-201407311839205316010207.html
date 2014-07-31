@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Bookmark manager</title>
+		<link rel="stylesheet" type="text/css" href="/css/reset.css"> 
+	  <link rel="stylesheet" type="text/css" href="/css/application.css">  
+	</head>
+	<body>
+		<div class='wrapper'>
+			<header>
+	<a id='logo' href='/'>Bookmark Manager</a>
+	<div id='user-links'>
+		
+			<span id='welcome-message'>
+				Welcome, test@test.com
+			</span>
+			<a href='/users/favourites' class='button highlighted'>Favourites</a>
+			<a href='/links/new' id='add-link' class='button highlighted'>Add Link</a>
+			<form id='sign-out' method='post' action='/sessions'>
+				<input type='hidden' name='_method' value='delete'>
+				<input id='sign-out-button' class='button' type='submit' value='Sign Out'>
+			</form>
+			
+	</div>
+</header>
+			
+		  <div id='tags' class='container'>
+	<header class='container-header'>Tags</header>
+	<p>
+		
+			<a class='title' href=/tags/test>test,</a>
+
+		
+		<a class='title' href=/>All</a>
+	</p>
+</div>
+
+<div class='container'>
+	<header class='container-header'>Links</header>
+	<ul>
+		
+			<li class='link'>	
+	<div class='star-holder'>
+		<form class='favouriting' method='post' action='/users/favourites'>
+			<input type='hidden' name='link_id' value=8>
+		  <button class='favouriting-button' name='favourite-link' type='submit' >
+		  	<img src='http://imgur.com/I0EwG.png' />
+		  </button>
+		  <div>0 adds</div>
+		</form>
+	</div>
+	<a class='title' href="http://www.test.com">Test</a>
+	<div class='description'>testing</div>
+	<span class='source'>
+		added at 06:39PM on 31-July-2014 by  
+		<a href='#'>test@test.com</a>
+	</span>
+</li>
+
+		
+	</ul>
+</div>
+
+
+		 <div class='push'></div>
+		</div>
+		<div class='footer'>
+			<footer>
+	<div id='makersacademy-logo'>
+		<a href='http://www.makersacademy.com'>
+			<img id='makers-logo-img' src='http://www.makersacademy.com/images/logo-two-lines.png'>
+		</a>
+	</div>
+	<div id='technologies'>
+		<p><a class='title' href="http://www.makersacademy.com">
+			I built this page at Makers Academy, a highly selective 12 week coding course in London.</a>
+		</p>
+		<p> This website is built using Ruby, Sinatra, Rspec, Capybara, HTML and CSS
+		</p>
+	</div>
+</footer>
+		</div>
+	</body>
+</html>
