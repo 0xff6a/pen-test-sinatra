@@ -5,7 +5,7 @@ require_relative 'models/favourite'
 
 env = ENV["RACK_ENV"] || "development"
 # DataMapper::Logger.new(STDOUT, :debug)
-DataMapper.setup(:default, ENV['DATABASE_URL'])
+DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/bookmark_manager_#{env}")
 
 DataMapper.finalize
 # DataMapper.auto_migrate!
