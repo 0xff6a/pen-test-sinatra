@@ -4,7 +4,7 @@
 		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 	</div>
 	<span class='source'>
-		added yesterday by 
+		<%= Time.parse(link.timestamp).strftime("added at %I:%M%p on %d-%B-%Y by ") %> 
 		<a href='#'><%= User.first(:id => link.user_id).email if User.first(:id => link.user_id)%></a>
 	</span>
 </li>

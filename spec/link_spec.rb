@@ -9,9 +9,10 @@ end
 describe Link do
 
 	before(:each) do
+		user = create_user('test@test.com', 'test')
 		Link.create(:title => "Makers Academy",
 								:url => "http://wwww.makersacademy.com/",
-								:user_id => 1,
+								:user_id => user.id,
 								:timestamp => Time.now)
 	end
 
@@ -31,17 +32,17 @@ describe Link do
 	end
 
 	it 'can have tags added' do
-		link.update(:tags => [Tag.first_or_create(:text => 'education', :user_id => 1)])
+		link.update(:tags => [Tag.first_or_create(:text => 'education', :user_id => user.id)])
 		expect(link.tags.map(&:text)).to eq ['education']
 	end
 
 	it 'will not be saved without a valid url' do
 		expect { Link.create(:title => "Google",
 												:url => "blahblah",
-												:user_id => 1) }.to change { Link.count }.by(0)
+												:user_id => user.id) }.to change { Link.count }.by(0)
 		expect { Link.create(:title => "Google",
 												:url => "google.com",
-												:user_id => 1) }.to change { Link.count }.by(0)
+												:user_id => user.id) }.to change { Link.count }.by(0)
 	end
 
 	it 'should have a timestamp for when it was created' do
