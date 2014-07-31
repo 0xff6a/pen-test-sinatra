@@ -1,7 +1,9 @@
-<form class='container' action='/users' method='post'>
+<div class='container'>
 	<header class='container-header'>Please sign up</header>
-	Email:<input name='email' type ='text' value"<%= @user.email %>">
-	Password:<input name='password' type='password'>
-	Confirm Password: <input name='password_confirmation' type='password'>
-	<input class='button green' type='submit' value='Sign Up'>
-</form>
+	<form class='standard' action='/users' method='post'>
+		Email:<input name='email' type ='text' value"<%= @user.email %>">
+		Password:<input name='password' type='password'>
+		Confirm Password: <input name='password_confirmation' type='password'>
+		<input class='button green' type='submit' value='Sign Up'>
+	</form>
+</div>

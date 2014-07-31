@@ -11,6 +11,7 @@ class User
 
 	property :id, 											Serial
 	property :email, 										String, :format => :email_address, 
+																							:message => 'Invalid email format',
 																							:unique => true, 
 																							:message => 'This email is already taken'
 	property :password_digest, 					Text

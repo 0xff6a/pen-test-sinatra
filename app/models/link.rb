@@ -7,7 +7,7 @@ class Link
 
 	property :id, 				Serial
 	property :title, 			String
-	property :url, 				String, :format => :url
+	property :url, 				String, :format => :url, :message => 'invalid url format' 
 	property :timestamp,	String
 
 end
