@@ -5,6 +5,7 @@
 			<span id='welcome-message'>
 				Welcome, <%= current_user.email %>
 			</span>
+			<a href='/users/favourites' class='button highlighted'>Favourites</a>
 			<a href='/links/new' id='add-link' class='button highlighted'>Add Link</a>
 			<form id='sign-out' method='post' action='/sessions'>
 				<input type='hidden' name='_method' value='delete'>

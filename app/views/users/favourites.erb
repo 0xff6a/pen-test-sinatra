@@ -1,0 +1,8 @@
+<div class='container'>
+	<header class='container-header'>Favourites</header>
+	<ul>
+		<% @user.favourites.links.each do |link| %>
+			<%= partial :link, :locals => {:link => link} %>
+		<% end %>
+	</ul>
+</div>

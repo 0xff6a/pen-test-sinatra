@@ -54,6 +54,7 @@ describe Link do
 		expect(link.description).to eq 'What a nice link'
 	end
 
+
 	def link
 		Link.first
 	end
