@@ -18,7 +18,7 @@ feature 'User browses the list of links and tags' do
 		create_link('http://www.bing.com',
 								'Bing',
 								'search',
-								user)		
+								user, 'The second best search')		
 	}
 
 	scenario 'when opening the home page' do
@@ -27,6 +27,7 @@ feature 'User browses the list of links and tags' do
 		expect(page).to have_content('Code.org')
 		expect(page).to have_content('education')
 		expect(page).to have_content('search')
+		expect(page).to have_content('The second best search')
 	end
 
 	scenario 'filtered by a tag' do
@@ -40,11 +41,12 @@ feature 'User browses the list of links and tags' do
 		expect(page).not_to have_content('Bing')
 	end
 
-	def create_link(url, title, tag, user)
+	def create_link(url, title, tag, user, description='')
 		Link.create(:url => url, :title => title, 
 								:tags => [Tag.first_or_create(:text => tag, :user_id => user.id)], 
 								:user_id => user.id,
-								:timestamp => Time.now )
+								:timestamp => Time.now,
+								:description => description )
 	end
 
 end

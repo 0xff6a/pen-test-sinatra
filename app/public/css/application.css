@@ -162,6 +162,10 @@ div.flash-notice, li.flash-error {
   color: white;
 }
 
+p.new-link-field{
+  padding: 2px;
+}
+
 footer {
 	font-family: Arial;
 	font-size: 10pt;

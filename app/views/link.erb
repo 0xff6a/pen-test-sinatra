@@ -1,8 +1,6 @@
 <li class='link'>
 	<a class='title' href="<%= link.url %>"><%= link.title %></a>
-	<div class='description'>
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-	</div>
+	<div class='description'><%= link.description %></div>
 	<span class='source'>
 		<%= Time.parse(link.timestamp).strftime("added at %I:%M%p on %d-%B-%Y by ") %> 
 		<a href='#'><%= User.first(:id => link.user_id).email if User.first(:id => link.user_id)%></a>
