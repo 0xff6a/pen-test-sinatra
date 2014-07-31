@@ -123,12 +123,21 @@ div.container {
 	margin-bottom: 20px;
 }
 
+div.star-holder img{
+   cursor: pointer;
+}
+
 div.star-holder{
   float: right;
   margin-top: -10px;
   font-size: 10pt;
-  text-align: center;
+  text-align: center; 
 }
+
+
+div.star-holder:hover{
+    background-color: red;
+  }
 
 li.link {
   background-color: #EEE; 
