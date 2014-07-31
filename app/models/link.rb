@@ -4,6 +4,8 @@ class Link
 
 	belongs_to :user
 	has n, :tags, :through => Resource
+	has n, :favourites
+	has n, :users, through: :favourites
 
 	property :id, 					Serial
 	property :title, 				String, :required => true, 

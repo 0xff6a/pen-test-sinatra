@@ -1,4 +1,8 @@
+require 'helpers/setup'
+
 feature 'User browses the list of links and tags' do
+
+	include SetupHelpers
 
 	before(:each) {
 		user = create_user('test@test.com', 'test')
@@ -39,14 +43,6 @@ feature 'User browses the list of links and tags' do
 		expect(page).to have_content('Code.org')
 		expect(page).not_to have_content('Google')
 		expect(page).not_to have_content('Bing')
-	end
-
-	def create_link(url, title, tag, user, description='')
-		Link.create(:url => url, :title => title, 
-								:tags => [Tag.first_or_create(:text => tag, :user_id => user.id)], 
-								:user_id => user.id,
-								:timestamp => Time.now,
-								:description => description )
 	end
 
 end

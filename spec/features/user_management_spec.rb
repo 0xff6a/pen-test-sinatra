@@ -1,8 +1,7 @@
-
-require_relative 'helpers/session'
+require 'helpers/setup'
 require 'rest-client'
 
-include SessionHelpers
+include SetupHelpers
 
 feature 'User signs up' do
 	

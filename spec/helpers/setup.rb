@@ -1,4 +1,4 @@
-module SessionHelpers
+module SetupHelpers
 
 	def user
 		User.first
@@ -25,6 +25,24 @@ module SessionHelpers
 		User.create(:email => email,
 								:password => password,
 								:password_confirmation => password)
+	end
+
+	def create_link(url, title, tag, user, description='')
+		Link.create(:url => url, :title => title, 
+								:tags => [Tag.first_or_create(:text => tag, :user_id => user.id)], 
+								:user_id => user.id,
+								:timestamp => Time.now,
+								:description => description )
+	end
+
+	def add_link(url, title, tags = [], description='')
+		within('#new-link') do
+			fill_in 'url', :with => url
+			fill_in 'title', :with => title
+			fill_in 'tags', :with => tags.join(' ')
+			fill_in 'description', :with => description
+			click_button 'Add link'
+		end
 	end
 
 end
