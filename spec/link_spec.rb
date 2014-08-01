@@ -1,3 +1,5 @@
+require 'helpers/setup'
+
 describe 'Link: initialization' do
 	
 	it 'should have no links initially' do
@@ -7,6 +9,8 @@ describe 'Link: initialization' do
 end
 
 describe Link do
+
+	include SetupHelpers
 
 	before(:each) do
 		user = create_user('test@test.com', 'test')

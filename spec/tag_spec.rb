@@ -1,4 +1,8 @@
+require 'helpers/setup'
+
 describe Tag do
+
+	include SetupHelpers
 
 	before(:each) do
 		user = create_user('test@test.com', 'test')

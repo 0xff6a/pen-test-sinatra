@@ -1,12 +1,14 @@
 require 'helpers/setup'
 require 'rest-client'
 
-include SetupHelpers
-
 feature 'User signs up' do
+
+	include SetupHelpers
 	
-	let(:sample_email) { 'jeremy@example.com' }
-	let(:sample_pwd)	 { '1234'								}
+	let(:sample_email) 	{ 'jeremy@example.com' 										}
+	let(:sample_pwd)	 	{ '1234'																	}
+
+	before(:each) 			{ allow(Mailer).to receive(:send_message) }
 
 	scenario 'when being logged out' do
 		expect(Mailer).to receive(:send_message)
@@ -31,12 +33,13 @@ end
 
 feature 'User signs in' do
 
-	let(:test_email) 	{ 'test@test.com' }
-	let(:test_pwd)		{ 'test'					}
+	include SetupHelpers
 
-	before(:each) do
-		create_user(test_email, test_pwd)
-	end
+	let(:test_email) 	{ 'test@test.com' 									}
+	let(:test_pwd)		{ 'test'														}
+
+	before(:each) 		{ create_user(test_email, test_pwd) }
+		
 
 	scenario 'with correct credentials' do
 		visit '/'
@@ -56,12 +59,12 @@ end
 
 feature 'User signs out' do
 
-	let(:test_email) 	{ 'test@test.com' }
-	let(:test_pwd)		{ 'test'					}
+	include SetupHelpers
 
-	before(:each) do
-		create_user(test_email, test_pwd)
-	end
+	let(:test_email) 	{ 'test@test.com' 									}
+	let(:test_pwd)		{ 'test'														}
+
+	before(:each) 		{ create_user(test_email, test_pwd) }
 
 	scenario 'while being signed in' do
 		sign_in(test_email, test_pwd)
@@ -74,9 +77,9 @@ end
 
 feature 'User forgets password' do
 
-	before(:each) do
-		create_user('foxjerem@gmail.com', '1234')
-	end
+	include SetupHelpers
+
+	before(:each) { create_user('foxjerem@gmail.com', '1234') }
 
 	scenario 'requesting a password reset' do
 		expect(user.password_token).to be nil

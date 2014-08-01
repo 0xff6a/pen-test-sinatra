@@ -7,7 +7,7 @@ module SetupHelpers
 	def sign_up(email = sample_email,
 							password = sample_pwd,
 							password_confirmation = sample_pwd)
-		visit 'users/new'
+		visit '/users/new'
 		fill_in :email, :with => email
 		fill_in :password, :with => password
 		fill_in :password_confirmation, :with => password_confirmation

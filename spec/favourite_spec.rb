@@ -1,5 +1,9 @@
+require 'helpers/setup'
+
 describe Favourite do 
 
+	include SetupHelpers
+	
 	it 'should be able to count how many times a link has been favourited' do
 		user1 = create_user('test@test.com', 'test') 
 		user2 = create_user('test2@test.com', 'test2') 

@@ -1,6 +1,6 @@
 require 'helpers/setup'
 
-feature 'Users create favourite links when signed in' do
+feature 'Users favourites' do
 
 	include SetupHelpers	
 
@@ -15,6 +15,16 @@ feature 'Users create favourite links when signed in' do
 		click_button 'fav'
 		expect(page).to have_content('Added to favourites')
 		expect(user.links.count).to eq(1)
+	end
+
+	scenario 'navigating to a favourites page' do
+		visit('/')
+		click_button 'fav'
+		add_link('http://www.notfav.com', 'Not Fav', ['test'], 'testing')
+		visit('/')
+		click_on 'profile-button'
+		expect(page).to have_content('Test')
+		expect(page).not_to have_content('Not Fav')
 	end
 
 end
