@@ -28,15 +28,25 @@ helpers do
 		erb :'sessions/new'
 	end
 
-	def process_password_reset_for(user)
+	def process_password_reset_request_for(user)
 		save_token_for(user)
 		send_password_reset_message_to(user)
 		flash[:notice] = 'A password reset email is on its way'
 		redirect to('/')
 	end
 
-	def failed_password_reset
+	def failed_password_request_reset
 		flash[:errors] = ['Your details could not be found']
+		redirect to('/')
+	end
+
+	def password_reset_sucess
+		flash[:notice] = 'Your password has been reset'
+		redirect to('/')
+	end
+
+	def password_reset_error
+		flash[:errors] = ['Your token has expired or is invalid']
 		redirect to('/')
 	end
 
@@ -59,6 +69,10 @@ helpers do
 
 	def save_token_for(user)
 		user.update(:password_token => generate_token, :password_token_timestamp => Time.now)
+	end
+
+	def valid_token_timestamp?(user, validity_window)
+		Time.parse(user.password_token_timestamp) > (Time.now - validity_window)
 	end
 
 end

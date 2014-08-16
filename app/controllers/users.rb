@@ -16,13 +16,12 @@ end
 
 post '/users/reset_password' do
 	user = User.first(:email => params[:email])
-	user ? process_password_reset_for(user) : failed_password_reset
+	user ? process_password_reset_request_for(user) : failed_password_reset_request
 end
 
 get '/users/reset_password/:token' do |token|
-	@token = token
-	@user = User.first(:password_token => token)
-	if @user && Time.parse(@user.password_token_timestamp) > (Time.now - SECONDS_IN_HOUR)
+	@token, @user = token, User.first(:password_token => token)
+	if @user && valid_token_timestamp?(@user, SECONDS_IN_HOUR)
 		erb :'users/reset_password' 
 	else
 		erb :'users/reset_error'
@@ -33,10 +32,8 @@ post '/users/confirm_reset_password' do
 	user = User.first(:password_token => params[:token])
 	if user
 		set_new_password_for(user, params[:new_password], params[:new_password_confirmation])
-		flash[:notice] = 'Your password has been reset'
-		redirect to('/')
+		password_reset_sucess
 	else
-		flash[:errors] = ['Your token has expired or is invalid']
-		redirect to('/')
+		password_reset_error
 	end
 end
