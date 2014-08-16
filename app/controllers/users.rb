@@ -6,18 +6,8 @@ get '/users/new' do
 end
 
 post '/users' do
-	@user = User.create(:email => params[:email],
-										 :password => params[:password],
-										 :password_confirmation => params[:password_confirmation])
-	if @user.save
-		session[:user_id] = @user.id
-		send_welcome_message_to(@user)
-		flash[:notice] = 'Welcome'
-		redirect to('/')
-	else
-		flash.now[:errors] = @user.errors.full_messages
-		erb :'users/new'
-	end
+	@user = create_user(params[:email], params[:password], params[:password_confirmation])
+	@user.save ? process_new_user(@user) : failed_new_user(@user)
 end
 
 get '/users/forgotten_password' do
@@ -26,15 +16,7 @@ end
 
 post '/users/reset_password' do
 	user = User.first(:email => params[:email])
-	if user
-		save_token_for(user)
-		send_password_reset_message_to(user)
-		flash[:notice] = 'A password reset email is on its way'
-		redirect to('/')
-	else
-		flash[:errors] = ['Your details could not be found']
-		redirect to('/')
-	end
+	user ? process_password_reset_for(user) : failed_password_reset
 end
 
 get '/users/reset_password/:token' do |token|

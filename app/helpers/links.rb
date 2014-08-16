@@ -12,5 +12,10 @@ helpers do
 			Tag.first_or_create(:text => tag, :user_id => session[:user_id]) 
 		end
 	end
+
+	def link_error_handler(bad_link)
+		flash.now[:errors] = bad_link.errors.full_messages
+		erb :'links/new'
+	end
 	
 end

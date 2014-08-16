@@ -6,8 +6,7 @@ post '/links' do
 	tags = create_tags(params['tags'])
 	link = create_link(params['url'], params['title'], tags, params[:description] )
 	redirect to('/') if link.save
-	flash.now[:errors] = link.errors.full_messages
-	erb :'links/new'
+	link_error_handler(link)
 end
 
 
