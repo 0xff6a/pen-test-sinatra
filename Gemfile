@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 
 gem 'sinatra'
 gem 'sinatra-partial'
+gem 'sinatra-contrib'
 gem 'data_mapper'
 gem 'dm-postgres-adapter'
 gem 'database_cleaner'

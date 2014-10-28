@@ -6,17 +6,17 @@ end
 
 post '/sessions' do
 
-  session[:login_attempts] ||= 0
-  session[:login_attempts] += 1
+  cookies[:login_attempts] ||= 0
+  cookies[:login_attempts] += 1
 
-  if session[:login_attempts] > MAX_ATTEMPTS
+  if cookies[:login_attempts] > MAX_ATTEMPTS
     lock_account
   else
     email, password = params[:email], params[:password]
   	user = User.authenticate(email, password)
   	user ? process_authentication(user) : failed_authentication
   end
-  
+
 end
 
 delete '/sessions' do

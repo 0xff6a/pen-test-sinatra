@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'sinatra/partial'
+require 'sinatra/cookies'
 require 'data_mapper'
 require 'rack-flash'
 require 'rest-client'
