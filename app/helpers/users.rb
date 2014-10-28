@@ -47,7 +47,7 @@ helpers do
 
 	def lock_account
 		flash[:errors] = ['Your account has been locked']
-		redirect to('/')
+		erb :'sessions/new'
 	end
 
 	def password_reset_error
