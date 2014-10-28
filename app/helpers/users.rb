@@ -45,6 +45,11 @@ helpers do
 		redirect to('/')
 	end
 
+	def lock_account
+		flash[:errors] = ['Your account has been locked']
+		redirect to('/')
+	end
+
 	def password_reset_error
 		flash[:errors] = ['Your token has expired or is invalid']
 		redirect to('/')

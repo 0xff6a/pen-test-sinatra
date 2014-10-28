@@ -1,4 +1,4 @@
-MAX_ATTEMPTS = 5
+MAX_ATTEMPTS = 3
 
 get '/sessions/new' do
 	erb :'sessions/new'
@@ -7,10 +7,10 @@ end
 post '/sessions' do
 
   session[:login_attempts] ||= 0
+  session[:login_attempts] += 1
 
-  raise 'Account Locked' if session[:login_attempts] > MAX_ATTEMPTS
-	session[:login_attempts] += 1
-  
+  lock_account if session[:login_attempts] > MAX_ATTEMPTS
+
   email, password = params[:email], params[:password]
 	user = User.authenticate(email, password)
 	user ? process_authentication(user) : failed_authentication
