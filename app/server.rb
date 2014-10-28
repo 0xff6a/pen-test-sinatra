@@ -36,4 +36,3 @@ set :partial_template_engine, :erb
 
 
 
-

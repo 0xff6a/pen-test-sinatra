@@ -6,13 +6,15 @@ end
 
 post '/sessions' do
   
+  session[:login_attempts] ||= 0
+
   raise 'Account Locked' if session[:login_attempts] > MAX_ATTEMPTS
 	
   email, password = params[:email], params[:password]
 	user = User.authenticate(email, password)
 	user ? process_authentication(user) : failed_authentication
   
-  session[:login_attempts] +=1
+  session[:login_attempts] += 1
 end
 
 delete '/sessions' do
