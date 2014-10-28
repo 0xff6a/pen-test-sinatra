@@ -7,9 +7,9 @@ end
 post '/sessions' do
 
   cookies[:login_attempts] ||= 0
-  cookies[:login_attempts] += 1
+  cookies[:login_attempts] = cookies[:login_attempts].to_i + 1
 
-  if cookies[:login_attempts] > MAX_ATTEMPTS
+  if cookies[:login_attempts].to_i > MAX_ATTEMPTS
     lock_account
   else
     email, password = params[:email], params[:password]
