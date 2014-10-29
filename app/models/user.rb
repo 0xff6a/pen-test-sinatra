@@ -17,9 +17,10 @@ class User
 	property :password_digest, 					Text
 	property :password_token,						Text
 	property :password_token_timestamp, String
+	property :login_attempts,						Integer, :default => 0
+
 	has n, :favourites
 	has n, :links, through: :favourites
-
 
 	def password=(password)
 		@password = password

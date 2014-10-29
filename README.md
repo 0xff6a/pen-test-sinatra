@@ -5,8 +5,8 @@ Using a full suite of penetration tests against my own app hosted on heroku. Ori
 
 I. Authentication
 -----------------
-- Brute force attacks cracks password easily. Attemp to halt attacks by limiting login attempts to 5 per session:
-  - Using sinatra sessions. Easily bypassed by changing rack session id in each request
+- Brute force attacks cracks password easily. Attemp to halt attacks by limiting login attempts to 5 per user:
+  - Using sessions/cookies: 
   ```shell
     if session[:login_attempts] > MAX_ATTEMPTS
       lock_account
@@ -14,4 +14,10 @@ I. Authentication
       attempt_authentication
     end
   ```
-  - Using sinatra cookies.
+  **Easily bypassed by changing rack session id in each request**
+
+  - Saving login attempts to database as login_attempts
+  ```shell
+  
+  ```
+  - Main authentication is now secure, but how about my forgotten password/password change?

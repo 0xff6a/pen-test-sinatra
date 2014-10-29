@@ -5,14 +5,15 @@ get '/sessions/new' do
 end
 
 post '/sessions' do
+  email, password = params[:email], params[:password]
 
-  cookies[:login_attempts] ||= 0
-  cookies[:login_attempts] = cookies[:login_attempts].to_i + 1
+  user = User.first(:email => email)
+  user.update(:login_attempts => user.login_attempts + 1)
+  puts user.login_attempts
 
-  if cookies[:login_attempts].to_i > MAX_ATTEMPTS
+  if user && user.login_attempts > MAX_ATTEMPTS
     lock_account
   else
-    email, password = params[:email], params[:password]
   	user = User.authenticate(email, password)
   	user ? process_authentication(user) : failed_authentication
   end
@@ -24,3 +25,4 @@ delete '/sessions' do
 	session[:user_id] = nil
 	redirect to('/')
 end
+
