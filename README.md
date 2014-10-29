@@ -13,7 +13,8 @@ I. Authentication
     else
       attempt_authentication
     end
-  ```**Easily bypassed by changing rack session id in each request**
+  ```
+  **Easily bypassed by changing rack session id in each request**
 
   - Saving login attempts to database as login_attempts
   ```shell
@@ -25,5 +26,6 @@ I. Authentication
   else
     attempt_authentication
   end
-  ```**Prevents previous attack**
+  ```
+  **Prevents previous attack**
 - Main authentication is now secure, but how about my forgotten password/password change?
