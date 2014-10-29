@@ -9,7 +9,6 @@ post '/sessions' do
 
   user = User.first(:email => email)
   user.update(:login_attempts => user.login_attempts + 1)
-  puts user.login_attempts
 
   if user && user.login_attempts > MAX_ATTEMPTS
     lock_account

@@ -18,6 +18,14 @@ I. Authentication
 
   - Saving login attempts to database as login_attempts
   ```shell
-  
+  user = User.first(:email => email)
+  user.update(:login_attempts => user.login_attempts + 1)
+
+  if user && user.login_attempts > MAX_ATTEMPTS
+    lock_account
+  else
+    attempt_authentication
+  end
   ```
-  - Main authentication is now secure, but how about my forgotten password/password change?
+  **Prevents previous attack**
+- Main authentication is now secure, but how about my forgotten password/password change?
