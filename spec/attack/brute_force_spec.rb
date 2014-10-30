@@ -47,8 +47,10 @@ describe BruteForceAttack do
       attack.launch!
     end
 
-    it 'returns the responses for each request' do
-
+    it 'saves the responses for each request' do
+      allow(attack).to receive(:send_http_request).and_return('200')
+      attack.launch!
+      expect(attack.responses.first).to eq ['200']
     end
 
   end

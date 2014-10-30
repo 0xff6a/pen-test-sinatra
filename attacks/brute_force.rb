@@ -13,16 +13,17 @@ class BruteForceAttack
   end
 
   def launch!
-    @payloads.each do |payload|
-      payload.param_values.map do |value| 
-        req = create_req_from_payload(payload, value)
-        # puts req.to_yaml
-        send_http_request(req)
-      end
-    end
+    @payloads.each{ |payload| @responses << launch_payload(payload) }
   end
 
   private
+
+  def launch_payload(payload)
+   payload.param_values.map do |value| 
+      req = create_req_from_payload(payload, value)
+      send_http_request(req)
+    end
+  end
 
   def set_target_req
     Net::HTTP::Post.new(target_uri)  
