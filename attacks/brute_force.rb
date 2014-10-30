@@ -3,13 +3,17 @@ require 'net/http'
 class BruteForceAttack
 
   attr_reader   :target_uri, :target_req, :payloads
-  attr_accessor :responses
+  attr_accessor :fixed_req_params, :responses
 
   def initialize(target_uri)
     @target_uri = URI.parse(target_uri)
     @target_req = set_target_req
     @payloads   = []
     @responses  = []
+  end
+
+  def set_fixed_req_params(params)
+    @fixed_req_params = params
   end
 
   def launch!
@@ -39,7 +43,7 @@ class BruteForceAttack
     Net::HTTP.start(target_uri.hostname, target_uri.port){ |http| http.request(req) }
   end
 
-  def create_req_from_payload(payload, value)
+  def create_req(payload, value)
     req = target_req.clone
     req.set_form_data(payload.param_key => value)
     req
@@ -48,7 +52,7 @@ class BruteForceAttack
   def payload_error_handler
     raise 'cannot have more than 2 payloads' if max_payloads?
   end
-  
+
   def max_payloads?
     payloads.count >= 2
   end

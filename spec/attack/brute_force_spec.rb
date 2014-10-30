@@ -60,4 +60,20 @@ describe BruteForceAttack do
 
   end
 
+  context 'fixed request params' do
+
+    let(:params) { { 'rack.session' => '12345678', 'email' => 'me@me.com'} }
+
+    it 'can accept fixed params to be added to each http request' do
+      attack.set_fixed_req_params(params)
+      expect(attack.fixed_req_params).to eq params
+    end
+
+    it 'fixed params will be added to each http request' do
+      expect(attack.target_req).to receive(:set_form_data).with(params)
+      attack.set_fixed_req_params(params)
+    end
+
+  end
+
 end
