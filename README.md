@@ -3,6 +3,8 @@ Penetration Testing Example
 
 Using a full suite of penetration tests against my own app hosted on heroku. Original app details can be found [here](https://github.com/foxjerem/bookmark-manager)
 
+See README in attacks subdirectory for details of the attack code
+
 I. Authentication
 -----------------
 Created a simplified brute force attack (using only 10 password guesses loaded from a file) using the Net::HTTP library. Attack cracks password easily. Attemp to halt attacks by limiting login attempts to 5 per user:
