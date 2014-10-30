@@ -16,6 +16,10 @@ class BruteForceAttack
     @payloads.each{ |payload| @responses << launch_payload(payload) }
   end
 
+  def add_payloads(payload_array)
+    @payloads += payload_array
+  end
+
   private
 
   def launch_payload(payload)

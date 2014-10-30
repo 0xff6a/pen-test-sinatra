@@ -1,8 +1,8 @@
 describe BruteForceAttack do
   
-  let(:uri)     { 'http://localhost:9292/sessions/'                                }
-  let(:attack)  { BruteForceAttack.new(uri)                                        }
-  let(:payload) { double Payloads, param_key: 'password', param_values: ['12345678'] }
+  let(:uri)     { 'https://fast-sierra-4695.herokuapp.com/sessions/'                  }
+  let(:attack)  { BruteForceAttack.new(uri)                                           }
+  let(:payload) { double PayloadSet, param_key: 'password', param_values: ['12345678']  }
 
   context 'initialization' do
 
@@ -28,7 +28,7 @@ describe BruteForceAttack do
   context 'payloads' do
 
     it 'payloads can be added' do
-      attack.payloads << payload
+      attack.add_payloads([payload])
       expect(attack.payloads).to eq [payload]
     end
   

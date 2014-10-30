@@ -1,4 +1,4 @@
-class Payloads
+class PayloadSet
 
   attr_reader   :param_key
   attr_accessor :param_values
@@ -10,6 +10,10 @@ class Payloads
 
   def add_values(param_values)
     @param_values += param_values
+  end
+
+  def add_values_from_file(filepath)
+    @param_values += File.read(filepath).split("\n")
   end
 
 end

@@ -1,7 +1,7 @@
-describe Payloads do
+describe PayloadSet do
   
-  let(:payloads)        { Payloads.new('password', ['12345678', 'open'] ) }
-  let(:empty_payloads)  { Payloads.new('password')                        }
+  let(:payloads)        { PayloadSet.new('password', ['12345678', 'open'] ) }
+  let(:empty_payloads)  { PayloadSet.new('password')                        }
   
   context 'initialisation' do
     
@@ -24,6 +24,14 @@ describe Payloads do
     it 'param values can be added' do
       empty_payloads.add_values(['12345678'])
       expect(empty_payloads.param_values).to eq ['12345678']
+    end
+
+    it 'can read param values from a file' do
+      allow(File).to receive(:read)
+          .with('dummy.txt')
+          .and_return("a\nb")
+      empty_payloads.add_values_from_file('dummy.txt')
+      expect(empty_payloads.param_values).to eq ['a', 'b']
     end
 
   end
