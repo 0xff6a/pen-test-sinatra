@@ -5,7 +5,7 @@ Using a full suite of penetration tests against my own app hosted on heroku. Ori
 
 I. Authentication
 -----------------
-Brute force attacks cracks password easily. Attemp to halt attacks by limiting login attempts to 5 per user:
+Created a simplified brute force attack (using only 10 password guesses loaded from a file) using the Net::HTTP library. Attack cracks password easily. Attemp to halt attacks by limiting login attempts to 5 per user:
 
  - Using sessions/cookies: 
   ```shell

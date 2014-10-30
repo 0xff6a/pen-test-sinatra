@@ -1,5 +1,7 @@
 ENV["RACK_ENV"] = 'test'
 
+Dir[File.join(File.dirname(__FILE__), '..', 'attacks/*.rb')].each {|file| require file }
+
 require File.join(File.dirname(__FILE__), '..', 'app/server.rb')
 require 'database_cleaner'
 require 'capybara/rspec'
