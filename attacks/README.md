@@ -20,3 +20,4 @@ Classes
 -------
 - Payload: a form parameter name and a set of values (can be loaded from file)
 - BruteForceAttack: creates post requests to deliver payloads to a target resource
+- AttackAnalyzer: checks attack responses for indicators of success (page content, status codes, etc)

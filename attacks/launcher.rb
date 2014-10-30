@@ -2,6 +2,7 @@ require 'net/http'
 
 require_relative 'brute_force'
 require_relative 'payload_set'
+require_relative 'attack_analyzer'
 require_relative 'helpers'
 
 def payload_factory(params)
@@ -26,7 +27,7 @@ end
 def launch_attack
   attack = setup_attack
   attack.launch!
-  p attack.check_for_status_code('303')
+  p AttackAnalyzer.check_for_status_code('303', attack)
 end
 
 def print_usage_msg

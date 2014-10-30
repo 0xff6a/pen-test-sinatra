@@ -27,14 +27,6 @@ class BruteForceAttack
     self
   end
 
-  def check_for_response(text)
-    @responses.map{ |response| !response.body.match(text).nil? }
-  end
-
-  def check_for_status_code(code)
-    @responses.map{ |response| response.code == code }
-  end
-
   private
 
   def launch_payload(payload)

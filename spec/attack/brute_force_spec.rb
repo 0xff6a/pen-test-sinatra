@@ -60,19 +60,6 @@ describe BruteForceAttack do
 
   end
 
-  context 'analyzing responses' do
-
-    before(:each) { attack.payloads << payload  }
-
-    it 'can check if a response contains a given text fragment' do
-      res = double res, body: 'welcome'
-      allow(attack).to receive(:send_http_request).and_return(res)
-      attack.launch!
-      expect(attack.check_for_response('welcome')).to eq [true]
-    end
-
-  end
-
   context 'fixed request params' do
 
     let(:params) { { 'rack.session' => '12345678', 'email' => 'me@me.com'} }
