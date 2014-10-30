@@ -36,7 +36,7 @@ class BruteForceAttack
   def launch_payload(payload)
    payload.param_values.map do |value| 
       req = create_req_from_payload(payload, value)
-      puts send_http_request(req).body
+      send_http_request(req).body
     end
   end
 
@@ -52,6 +52,7 @@ class BruteForceAttack
     req = target_req.clone
     params = @fixed_req_params.merge(payload.param_key => value)
     req.set_form_data(params)
+    p req.body
     req
   end
 

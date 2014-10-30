@@ -5,6 +5,7 @@ get '/sessions/new' do
 end
 
 post '/sessions' do
+  puts params.inspect
   email, password = params[:email], params[:password]
 
   user = User.first(:email => email)
