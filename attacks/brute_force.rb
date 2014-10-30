@@ -18,13 +18,17 @@ class BruteForceAttack
   end
 
   def launch!
-    @responses = @payloads.map{ |payload| launch_payload(payload) }
+    @responses = @payloads.map{ |payload| launch_payload(payload) }.flatten
   end
 
   def add_payloads(payload_array)
     payload_error_handler
     @payloads += payload_array
     self
+  end
+
+  def check_for_response(text)
+    @responses.map{ |response| !response.body.match(text).nil? }
   end
 
   private

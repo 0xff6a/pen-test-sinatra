@@ -34,7 +34,7 @@ end
 def launch_attack
   attack = setup_attack
   attack.launch!
-  p attack.responses
+  p attack.check_for_response('Welcome')
 end
 
 def print_usage_msg

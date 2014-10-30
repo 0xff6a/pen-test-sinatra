@@ -55,7 +55,19 @@ describe BruteForceAttack do
     it 'saves the responses for each request' do
       allow(attack).to receive(:send_http_request).and_return('200')
       attack.launch!
-      expect(attack.responses.first).to eq ['200']
+      expect(attack.responses.first).to eq '200'
+    end
+
+  end
+
+  context 'analyzing responses' do
+
+    before(:each) { attack.payloads << payload  }
+
+    it 'can check if a response contains a given text fragment' do
+      allow(attack).to receive(:send_http_request).and_return('welcome')
+      attack.launch!
+      expect(attack.check_for_response('welcome')).to eq [true]
     end
 
   end
