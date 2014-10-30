@@ -2,8 +2,8 @@ require 'net/http'
 
 class BruteForceAttack
 
-  attr_reader   :target_uri, :target_req
-  attr_accessor :payloads, :responses
+  attr_reader   :target_uri, :target_req, :payloads
+  attr_accessor :responses
 
   def initialize(target_uri)
     @target_uri = URI.parse(target_uri)
@@ -17,7 +17,9 @@ class BruteForceAttack
   end
 
   def add_payloads(payload_array)
+    payload_error_handler
     @payloads += payload_array
+    self
   end
 
   private
@@ -41,6 +43,14 @@ class BruteForceAttack
     req = target_req.clone
     req.set_form_data(payload.param_key => value)
     req
+  end
+
+  def payload_error_handler
+    raise 'cannot have more than 2 payloads' if max_payloads?
+  end
+  
+  def max_payloads?
+    payloads.count >= 2
   end
 
 end

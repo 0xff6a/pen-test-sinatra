@@ -14,6 +14,7 @@ class PayloadSet
 
   def add_values_from_file(filepath)
     @param_values += File.read(filepath).split("\n")
+    self
   end
 
 end

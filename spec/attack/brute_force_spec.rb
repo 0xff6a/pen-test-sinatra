@@ -31,6 +31,11 @@ describe BruteForceAttack do
       attack.add_payloads([payload])
       expect(attack.payloads).to eq [payload]
     end
+
+    it 'can not accept more than two payloads' do
+      2.times { attack.add_payloads([payload]) }
+      expect{ attack.add_payloads([payload]) }.to raise_error(RuntimeError, 'cannot have more than 2 payloads')
+    end
   
   end
 

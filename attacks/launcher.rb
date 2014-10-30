@@ -3,21 +3,24 @@ require 'net/http'
 require_relative 'brute_force'
 require_relative 'payload_set'
 
+def payload_factory(params)
+  name, filepath = params.split(':')
+  PayloadSet.new(name).add_values_from_file(filepath)
+end
+
 def setup_attack
-  target = ARGV.first
+  target = ARGV.shift
   attack = BruteForceAttack.new(target)
 
-  usernames = PayloadSet.new('email')
-  passwords = PayloadSet.new('password')
+  payloads = ARGV.map do |params|
+    payload_factory(params)
+  end
 
-  usernames.add_values_from_file('users.txt')
-  passwords.add_values_from_file('passwords.txt')
-
-  attack.add_payloads([usernames, passwords])
+  attack.add_payloads(payloads)
 end
 
 def launch_attack
-  setup_attack
+  puts setup_attack.launch!
   # launch attack
   # analyze response
 end
