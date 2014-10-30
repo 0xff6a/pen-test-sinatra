@@ -2,15 +2,7 @@ require 'net/http'
 
 require_relative 'brute_force'
 require_relative 'payload_set'
-
-def parse(hash_string)
-  hash = {}
-  hash_string.split(',').each do |pair|
-    key,value = pair.split(/:/)
-    hash[key] = value
-  end
-  hash
-end
+require_relative 'helpers'
 
 def payload_factory(params)
   name, filepath = params.split(':')

@@ -1,4 +1,4 @@
-MAX_ATTEMPTS = 200
+MAX_ATTEMPTS = 5
 
 get '/sessions/new' do
 	erb :'sessions/new'
