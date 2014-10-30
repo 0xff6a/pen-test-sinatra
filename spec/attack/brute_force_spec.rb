@@ -65,7 +65,8 @@ describe BruteForceAttack do
     before(:each) { attack.payloads << payload  }
 
     it 'can check if a response contains a given text fragment' do
-      allow(attack).to receive(:send_http_request).and_return('welcome')
+      res = double res, body: 'welcome'
+      allow(attack).to receive(:send_http_request).and_return(res)
       attack.launch!
       expect(attack.check_for_response('welcome')).to eq [true]
     end
