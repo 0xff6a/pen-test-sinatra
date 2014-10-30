@@ -1,11 +1,11 @@
 # require 'net/http'
 
-# class Launcher
+# create base http request
+# create payloads
+# create attack
+# launch attack
+# analyze response
 
-#   def initialize
 
-#   end
 
-# end
 
-# Net::HTTP.get URI.parse('http://localhost:8000/hello_world.txt')
