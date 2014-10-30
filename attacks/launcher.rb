@@ -9,6 +9,7 @@ def parse(hash_string)
     key,value = pair.split(/:/)
     hash[key] = value
   end
+  hash
 end
 
 def payload_factory(params)

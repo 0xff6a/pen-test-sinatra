@@ -6,10 +6,11 @@ class BruteForceAttack
   attr_accessor :fixed_req_params, :responses
 
   def initialize(target_uri)
-    @target_uri = URI.parse(target_uri)
-    @target_req = set_target_req
-    @payloads   = []
-    @responses  = []
+    @target_uri       = URI.parse(target_uri)
+    @target_req       = set_target_req
+    @fixed_req_params = {}
+    @payloads         = []
+    @responses        = []
   end
 
   def set_fixed_req_params(params)
@@ -17,7 +18,7 @@ class BruteForceAttack
   end
 
   def launch!
-    @payloads.each{ |payload| @responses << launch_payload(payload) }
+    @responses = @payloads.map{ |payload| launch_payload(payload) }
   end
 
   def add_payloads(payload_array)
@@ -43,9 +44,11 @@ class BruteForceAttack
     Net::HTTP.start(target_uri.hostname, target_uri.port){ |http| http.request(req) }
   end
 
-  def create_req(payload, value)
+  def create_req_from_payload(payload, value)
     req = target_req.clone
-    req.set_form_data(payload.param_key => value)
+    params = @fixed_req_params.merge(payload.param_key => value)
+    req.set_form_data(params)
+    puts req.body
     req
   end
 
