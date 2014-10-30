@@ -1,5 +1,6 @@
 require 'data_mapper'
 require File.join(File.dirname(__FILE__), 'app/data_mapper_setup.rb')
+require File.join(File.dirname(__FILE__), 'app/server.rb')
 
 task :auto_upgrade do
 	DataMapper.auto_upgrade!
@@ -19,4 +20,5 @@ task :seed do
   User.create(:email => 'me@me.com',
               :password => '12345678',
               :password_confirmation => '12345678')
+  puts User.all.inspect
 end
