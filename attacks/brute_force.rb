@@ -31,12 +31,16 @@ class BruteForceAttack
     @responses.map{ |response| !response.body.match(text).nil? }
   end
 
+  def check_for_status_code(code)
+    @responses.map{ |response| response.code == code }
+  end
+
   private
 
   def launch_payload(payload)
    payload.param_values.map do |value| 
       req = create_req_from_payload(payload, value)
-      send_http_request(req).body
+      send_http_request(req)
     end
   end
 
@@ -52,7 +56,6 @@ class BruteForceAttack
     req = target_req.clone
     params = @fixed_req_params.merge(payload.param_key => value)
     req.set_form_data(params)
-    p req.body
     req
   end
 

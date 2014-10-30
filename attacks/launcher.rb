@@ -34,7 +34,7 @@ end
 def launch_attack
   attack = setup_attack
   attack.launch!
-  p attack.check_for_response('Welcome')
+  p attack.check_for_status_code('303')
 end
 
 def print_usage_msg
