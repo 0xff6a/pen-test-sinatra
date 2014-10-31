@@ -1,8 +1,9 @@
 describe BruteForceAttack do
   
-  let(:uri)     { 'https://fast-sierra-4695.herokuapp.com/sessions/'                  }
-  let(:attack)  { BruteForceAttack.new(uri)                                           }
-  let(:payload) { double PayloadSet, param_key: 'password', param_values: ['12345678']  }
+  let(:uri)       { 'http://fast-sierra-4695.herokuapp.com/sessions/'                            }
+  let(:attack)    { BruteForceAttack.new(uri)                                                     }
+  let(:payload)   { double PayloadSet, param_key: 'password', param_values: ['12345678'], size: 1 }
+  let(:payload_2) { double PayloadSet, param_key: 'email', param_values: ['me@me.com'], size: 1   }
 
   context 'initialization' do
 
@@ -32,25 +33,36 @@ describe BruteForceAttack do
       expect(attack.payloads).to eq [payload]
     end
 
-    it 'can not accept more than two payloads' do
-      2.times { attack.add_payloads([payload]) }
-      expect{ attack.add_payloads([payload]) }.to raise_error(RuntimeError, 'cannot have more than 2 payloads')
+    it 'cannot accept payloads of different size' do
+      big = double PayloadSet, size: 10
+      attack.add_payloads([payload])
+      expect{ attack.add_payloads([big]) }.to raise_error(RuntimeError, 'cannot have different size payloads')
     end
   
   end
 
   context 'launching an attack' do
 
-    let(:req)     { double Net::HTTP::Post      }
-    before(:each) { attack.payloads << payload  }
+    let(:req)     { double Net::HTTP::Post          }
+    before(:each) { attack.add_payloads([payload])  }
 
-    it 'can generate a set of http requests from a payload' do
-      expect(attack).to receive(:create_req_from_payload)
-          .with(attack.payloads.first, '12345678')
+    it 'can generate an http request from a single payload' do
+      expect(attack).to receive(:create_post_req)
+          .with({'password' => '12345678'})
           .and_return(req)
       expect(attack).to receive(:send_http_request).with(req)
       attack.launch!
     end
+
+    it 'can generate an http request from mulitple payloads' do
+      attack.add_payloads([payload_2])
+      expect(attack).to receive(:create_post_req)
+          .with({'password' => '12345678', 'email' => 'me@me.com'})
+          .and_return(req)
+      expect(attack).to receive(:send_http_request).with(req)
+      attack.launch!
+    end
+
 
     it 'saves the responses for each request' do
       allow(attack).to receive(:send_http_request).and_return('200')
@@ -62,16 +74,22 @@ describe BruteForceAttack do
 
   context 'fixed request params' do
 
-    let(:params) { { 'rack.session' => '12345678', 'email' => 'me@me.com'} }
+    let(:params)  { { 'rack.session' => '12345678', 'email' => 'me@me.com'} }
+    
+    before(:each) do
+       attack.add_payloads([payload])  
+       attack.set_fixed_req_params(params) 
+       allow(attack).to receive(:send_http_request).and_return(nil)                       
+    end
 
     it 'can accept fixed params to be added to each http request' do
-      attack.set_fixed_req_params(params)
       expect(attack.fixed_req_params).to eq params
     end
 
     it 'fixed params will be added to each http request' do
-      expect(attack.target_req).to receive(:set_form_data).with(params)
-      attack.set_fixed_req_params(params)
+      all_params = params.merge({'password' => '12345678'})
+      expect(attack).to receive(:create_post_req).with(all_params)
+      attack.launch!
     end
 
   end

@@ -8,6 +8,10 @@ class PayloadSet
     @param_values = param_values
   end
 
+  def size
+    param_values.count
+  end
+
   def add_values(param_values)
     @param_values += param_values
   end

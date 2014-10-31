@@ -34,6 +34,18 @@ describe PayloadSet do
       expect(empty_payloads.param_values).to eq ['a', 'b']
     end
 
+    xit 'can create param values given a function and number of elements' do
+
+    end
+
+  end
+
+  context '#size' do
+
+    it 'knows the number of param values in the payload' do
+      expect(payloads.size).to eq 2
+    end
+
   end
 
 end

@@ -1,6 +1,6 @@
 describe AttackAnalyzer do
 
-  context 'analyzing responses' do
+  context 'analyzing responses after an attack' do
 
     let(:response)  { double Net::HTTPResponse, body: 'welcome', code: '200' }
     let(:attack)    { double BruteForceAttack, responses: [response]         }

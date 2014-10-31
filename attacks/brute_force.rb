@@ -18,22 +18,29 @@ class BruteForceAttack
   end
 
   def launch!
-    @responses = @payloads.map{ |payload| launch_payload(payload) }.flatten
+    @responses = (0...payload_size).map{ |index| launch_attack(index) }
   end
 
   def add_payloads(payload_array)
-    payload_error_handler
+    payload_error_handler(payload_array)
     @payloads += payload_array
     self
   end
 
   private
 
-  def launch_payload(payload)
-   payload.param_values.map do |value| 
-      req = create_req_from_payload(payload, value)
-      send_http_request(req)
-    end
+  def launch_attack(index)
+    fire_req(create_params(index))
+  end
+
+  def create_params(index)
+    params = fixed_req_params
+    @payloads.each { |payload| params[payload.param_key] = payload.param_values[index] }
+    params
+  end
+
+  def fire_req(params)
+    send_http_request(create_post_req(params))
   end
 
   def set_target_req
@@ -44,19 +51,23 @@ class BruteForceAttack
     Net::HTTP.start(target_uri.hostname, target_uri.port){ |http| http.request(req) }
   end
 
-  def create_req_from_payload(payload, value)
+  def create_post_req(params)
     req = target_req.clone
-    params = @fixed_req_params.merge(payload.param_key => value)
     req.set_form_data(params)
     req
   end
 
-  def payload_error_handler
-    raise 'cannot have more than 2 payloads' if max_payloads?
+  def payload_error_handler(payload_array)
+    raise 'cannot have different size payloads' unless all_same_size?(payload_array)
   end
 
-  def max_payloads?
-    payloads.count >= 2
+  def all_same_size?(payload_array)
+    all_payloads = payloads + payload_array
+    all_payloads.all?{ |payload| payload.size == all_payloads.first.size}
+  end
+
+  def payload_size
+    payloads.first.size
   end
 
 end
