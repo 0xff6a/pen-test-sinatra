@@ -34,8 +34,10 @@ describe PayloadSet do
       expect(empty_payloads.param_values).to eq ['a', 'b']
     end
 
-    xit 'can create param values given a function and number of elements' do
-
+    it 'can create param values given a function and number of elements' do
+      allow(PayloadSet).to receive(:generate_cookie).and_return('xyz').exactly(2).times
+      empty_payloads.add_values_from_function(:generate_cookie, 2)
+      expect(empty_payloads.param_values).to eq ['xyz', 'xyz']
     end
 
   end

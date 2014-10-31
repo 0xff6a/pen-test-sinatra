@@ -43,10 +43,6 @@ class BruteForceAttack
     send_http_request(create_post_req(params))
   end
 
-  def set_target_req
-    Net::HTTP::Post.new(target_uri)  
-  end
-
   def send_http_request(req)
     Net::HTTP.start(target_uri.hostname, target_uri.port){ |http| http.request(req) }
   end
@@ -68,6 +64,10 @@ class BruteForceAttack
 
   def payload_size
     payloads.first.size
+  end
+
+  def set_target_req
+    Net::HTTP::Post.new(target_uri)  
   end
 
 end

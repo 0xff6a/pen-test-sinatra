@@ -21,4 +21,12 @@ class PayloadSet
     self
   end
 
+  def add_values_from_function(function, count)
+    @param_values += (0...count).map{ self.class.send(function) }
+  end
+
+  def self.generate_cookie
+    (1..64).map{ [('0'..'9').to_a, ('a'..'z').to_a, ('A'..'Z').to_a ].flatten.sample }.join
+  end
+
 end
