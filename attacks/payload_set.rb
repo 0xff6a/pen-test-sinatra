@@ -14,6 +14,7 @@ class PayloadSet
 
   def add_values(param_values)
     @param_values += param_values
+    self
   end
 
   def add_values_from_file(filepath)
@@ -23,6 +24,7 @@ class PayloadSet
 
   def add_values_from_function(function, count)
     @param_values += (0...count).map{ self.class.send(function) }
+    self
   end
 
   def self.generate_cookie

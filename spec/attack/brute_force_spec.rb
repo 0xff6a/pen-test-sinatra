@@ -1,6 +1,6 @@
 describe BruteForceAttack do
   
-  let(:uri)       { 'http://fast-sierra-4695.herokuapp.com/sessions/'                            }
+  let(:uri)       { 'http://fast-sierra-4695.herokuapp.com/sessions/'                             }
   let(:attack)    { BruteForceAttack.new(uri)                                                     }
   let(:payload)   { double PayloadSet, param_key: 'password', param_values: ['12345678'], size: 1 }
   let(:payload_2) { double PayloadSet, param_key: 'email', param_values: ['me@me.com'], size: 1   }

